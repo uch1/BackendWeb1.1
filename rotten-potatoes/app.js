@@ -3,13 +3,18 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 
+const bodyParser = require('body-parser')
+
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/rotten-potatoes', { useMongoClient: true })
+mongoose.connect('mongodb://localhost/rotten-potatoes', { useNewUrlParser: true })
 
 const app = express()
+app.use(bodyParser.urlencoded({ extended: true }))
 
 const Review = mongoose.model('Review', {
-  title: String
+  title: String,
+  description: String,
+  movieTitle: String
 })
 
 // let reviews = [
@@ -33,6 +38,24 @@ app.get('/', function(req, res) {
     .catch(err => {
       console.log(err)
     });
+})
+
+// NEW
+app.get('/reviews/new', function(req, res) {
+  res.render('layouts/reviews-new', {})
+})
+
+// CREATE
+app.post('/reviews', function(req, res) {
+  console.log(req.body)
+
+  Review.create(req.body).then((review) => {
+    console.log(review)
+    res.redirect('/')
+  }).catch((err) => {
+    console.log(err.message)
+  })
+  // res.render('reviews-new', {})
 })
 
 // METHODS
