@@ -2,26 +2,26 @@
 
 <form method="POST" action="/reviews/{{review._id}}?_method=PUT">
   {{> reviews-form}}
-  <fieldset>
-    <legend>Edit Review</legend>
+  <!-- <fieldset>
+    <legend>Edit Review</legend> -->
     <!-- TITLE -->
-    <p>
+    <!-- <p>
       <label for="review-title">Title</label><br>
       <input id="review-title" type="text" name="title" value="{{review.title}}"/>
-    </p>
+    </p> -->
 
     <!-- MOVIE TITLE -->
-    <p>
+    <!-- <p>
       <label for="movie-title">Movie Title</label><br>
       <input id="movie-title" type="text" name="movieTitle" value="{{review.movieTitle}}" />
-    </p>
+    </p> -->
 
     <!-- DESCRIPTION -->
-    <p>
+    <!-- <p>
       <label for="review-description">Description</label><br>
       <textarea id="review-description" name="description" rows="10" />{{review.description}}</textarea>
     </p>
-  </fieldset>
+  </fieldset> -->
   <!-- BUTTON -->
   <p>
     <button type="submit">Save Review</button>
