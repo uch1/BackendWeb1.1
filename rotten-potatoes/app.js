@@ -4,6 +4,8 @@ const express = require('express')
 const methodOverride = require('method-override')
 const exphbs = require('express-handlebars')
 
+const reviews = require('./controllers/reviews.js')
+
 const bodyParser = require('body-parser')
 
 const mongoose = require('mongoose')
@@ -92,6 +94,17 @@ app.put('/reviews/:id', (req, res) => {
     })
 })
 
+// DELETE
+app.delete('/reviews/:id', (req, res) => {
+  console.log("DELETE review")
+  Review.findByIdAndRemove(req.params.id)
+    .then((review) => {
+      res.redirect('/')
+    }).catch((err) => {
+      console.log(err.message)
+    })
+})
+
 // METHODS
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}))
@@ -109,3 +122,5 @@ app.listen(3000, function() {
   console.log('App listening on port 3000!')
 
 })
+
+//module.export = app
