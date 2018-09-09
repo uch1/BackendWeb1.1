@@ -14,7 +14,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 const Review = mongoose.model('Review', {
   title: String,
   description: String,
-  movieTitle: String
+  movieTitle: String,
+  rating: Number
 })
 
 // let reviews = [
@@ -56,6 +57,16 @@ app.post('/reviews', function(req, res) {
     console.log(err.message)
   })
   // res.render('reviews-new', {})
+})
+
+// SHOW
+app.get('/reviews/:id', (req, res) => {
+  Review.findById(req.param.id)
+    .then((review) => {
+      res.render('layouts/reviews-show', {review: review})
+    }).catch((err) => {
+      console.log(err.message)
+    })
 })
 
 // METHODS
