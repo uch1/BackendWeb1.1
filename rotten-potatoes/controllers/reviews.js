@@ -1,6 +1,6 @@
-const Review = require('./models/review')
+const Review = require('../models/review.js')
 
- function reviews(app) {
+function reviews(app) {
 
   app.get('/', (req, res) => {
     Review.find()
@@ -13,3 +13,6 @@ const Review = require('./models/review')
   })
 
 }
+
+
+module.exports = reviews

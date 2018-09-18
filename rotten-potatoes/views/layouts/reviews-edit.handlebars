@@ -1,7 +1,19 @@
 <!-- views/reviews-edit.handlebars -->
 
-<form method="POST" action="/reviews/{{review._id}}?_method=PUT">
-  {{> reviews-form}}
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <form action="/reviews/{{review._id}}?_method=PUT" method="POST">
+      {{> reviews-form}}
+      <!-- BUTTON -->
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">Save Review</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- <form method="POST" action="/reviews/{{review._id}}?_method=PUT">
+  {{> reviews-form}} -->
   <!-- <fieldset>
     <legend>Edit Review</legend> -->
     <!-- TITLE -->
@@ -23,7 +35,7 @@
     </p>
   </fieldset> -->
   <!-- BUTTON -->
-  <p>
+  <!-- <p>
     <button type="submit">Save Review</button>
   </p>
-</form>
+</form> -->
