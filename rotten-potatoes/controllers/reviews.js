@@ -12,6 +12,23 @@ function reviews(app) {
       })
   })
 
+  // SHOW
+  app.get('/reviews/:id', (req, res) => {
+    // FIND
+    Review.findById(req.params.id)
+      .then(review => {
+        // Fetch its comments
+        Comment.find({ reviewId: req.params.id })
+          .then(comments => {
+            // respon with the template with both values
+            res.render('layouts/reviews-show', { review: review, comments: comments })
+          })
+      }).catch((err) => {
+        // Catch erros
+        console.log(err.message)
+      })
+  })
+
 }
 
 

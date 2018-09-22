@@ -1,11 +1,12 @@
 // PROPERTIES
 
+
+
 const express = require('express')
 const methodOverride = require('method-override')
 const exphbs = require('express-handlebars')
 
 const reviews = require('./controllers/reviews.js')
-
 const bodyParser = require('body-parser')
 
 const mongoose = require('mongoose')
@@ -15,24 +16,8 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
-const Review = mongoose.model('Review', {
-  title: String,
-  description: String,
-  movieTitle: String,
-  rating: Number
-})
 
-// let reviews = [
-//   { title: "Uchenna is the best book ever",
-//     movieTitle: "Uchenna"
-//   },
-//   { title: "I like cookies",
-//     movieTitle: "cookies"
-//   },
-//   { title: "MacBook Pro",
-//     movieTitle: "MacBook Air"
-//   }
-// ]
+const Review = require('./models/review')
 
 // INDEX
 app.get('/', function(req, res) {
@@ -106,6 +91,16 @@ app.delete('/reviews/:id', (req, res) => {
 })
 
 // METHODS
+
+// comments.js
+app.post('/reviews/comments', (req, res) => {
+  Comment.create(req.body)
+    .then(comment => {
+      res.redirect(`/reviews/${comment.reviewId}`)
+    }).catch((err) => {
+      console.log(err.message)
+    })
+})
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')

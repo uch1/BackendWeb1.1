@@ -1,4 +1,7 @@
-<form>
+<!-- views/partials/comment-form.handlebars -->
+
+<form action="/reviews/comments" method="post">
+  <input type="hidden" name="reviewId" value="{{review._id}}">
   <fieldset>
     <!-- TITLE -->
     <div class="form-group">
