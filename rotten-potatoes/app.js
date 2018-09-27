@@ -10,7 +10,7 @@ const reviews = require('./controllers/reviews.js')
 const bodyParser = require('body-parser')
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/rotten-potatoes', { useNewUrlParser: true })
+// mongoose.connect('mongodb://localhost/rotten-potatoes', { useNewUrlParser: true })
 
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -18,6 +18,7 @@ app.use(methodOverride('_method'))
 
 
 const Review = require('./models/review')
+const Comment = require('./models/comment')
 
 // INDEX
 app.get('/', function(req, res) {
@@ -102,6 +103,16 @@ app.post('/reviews/comments', (req, res) => {
     })
 })
 
+app.delete('reviews/comments/:id', (req, res) => {
+  console.log("DELETE comment")
+  Comment.findByIdAndRemove(req.params.id)
+    .then((comment) => {
+      res.redirect(`/reviews/${comment.reviewId}`)
+    }).catch((err) => {
+      console.log(err.message)
+    })
+})
+
 app.engine('handlebars', exphbs({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 
@@ -115,7 +126,6 @@ app.set('view engine', 'handlebars')
 
 app.listen(3000, function() {
   console.log('App listening on port 3000!')
-
 })
 
 module.export = app

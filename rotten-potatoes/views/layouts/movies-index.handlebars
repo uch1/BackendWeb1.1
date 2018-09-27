@@ -1,0 +1,28 @@
+
+<!--Movie index-->
+
+<h1>Hello Movies</h1>
+
+<!-- SHOW movies--> 
+
+<h1>Now Playing</h1>
+
+<!--MOVIES-->
+{{#each movies}}
+
+  <!--Display a list of movies-->
+  <li>
+    {{this.title}}
+    <a href="/movies/${this.id}">
+      <img src="{{this.poster_path}}" alt="{{this.title}}">  
+    </a>
+
+    <!-- MOVIE GENRES-->
+    {{#each genres}}
+      <li>
+        {{this.name}}
+      </li>
+    {{/each}}
+  </li>
+
+{{/each}}
