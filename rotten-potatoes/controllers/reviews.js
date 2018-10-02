@@ -29,6 +29,16 @@ function reviews(app) {
       })
   })
 
+  // GET a review 
+  app.get('/movies/:movieId/reviews/new', (req, res) => {
+    res.render('layouts/reviews-new', { movieId: req.params.movieId })
+  })
+
+  // POST review
+  app.post('/movies/:movieId/reviews', (req, res) => {
+    console.log(req.body)
+  })
+
 }
 
 

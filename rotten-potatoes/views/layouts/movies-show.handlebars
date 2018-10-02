@@ -1,14 +1,28 @@
 <!-- movies-show.handlebars -->
 
 <div class="row">
+
+  <div class="text-right">
+    <a href="movies/{{movie.id}}/reviews/new" class="btn btn-primary">Write Review</a>
+  </div>
+
+  <!--Poster--> 
   <div class="col-sm-4">
     <img class="img-responsive" src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}"/>
   </div>
+  <!--Title & Genres-->
   <div class="col-sm-8">
     <h1>{{movie.title}}</h1>
     <p class="lead">{{movie.overview}}</p>
   </div>
+  <!--Video Trailer-->
   <div class="embed-responsive embed-responsive-21by9">
     <iframe class ="embed-responsive-item" src="https://www.youtube.com/embed/{{movie.trailer_youtube_id}}?rel=0" frameborder="0"></iframe>
+  </div>
+
+  <div class="col-sm-12">
+    <div class="embed-responsive embed-responsive-16by9">
+      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{movie.trailer_youtube_id}}?rel=0" ></iframe>
+    </div>
   </div>
 </div>
