@@ -19,11 +19,33 @@ function movies(app) {
     // GET one movie
     app.get('/movies/:id', (req, res) => {
         moviedb.movieInfo({id: req.params.id})
-            .then(movie => {
-                res.render('layouts/movies-show', { movie: movie})
-            })
-            .catch(console.error)
+        .then(movie => {
+            if (movie.video) {
+                 moviedb.movieVideos({ id: req.params.id })
+                .then(videos => {
+                      movie.trailer_youtube_id = videos.results[0].key
+                      renderTemplate(movie)   
+                 })        
+            } else {
+                renderTemplate(movie)
+            }
+
+            function renderTemplate(movie) {
+                res.render('layouts/movies-show', { movie: movie })
+            }    
+        })
+        .catch(console.error)
     })
+
+
+
+
+
+
+
+
+
+    
 }
 
 
